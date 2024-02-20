@@ -23,15 +23,15 @@ const SIGN_UP = async (req, res) => {
     });
 
     if (!req.body.email.includes("@")) {
-      return res.status(400).json({
+      return res.status(401).json({
         message: "Invalid email, please include the '@' symbol.",
       });
     }
 
-    if (req.body.password.length < 6 || !/\d/.test(req.body.password)) {
-      return res.status(400).json({
+    if (req.body.password.length < 8 || !/\d/.test(req.body.password)) {
+      return res.status(401).json({
         message:
-          "Password must be at least 6 characters long and contain at least one number.",
+          "Password must be at least 8 characters long and contain at least one number.",
       });
     }
 

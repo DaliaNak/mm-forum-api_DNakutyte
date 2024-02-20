@@ -12,6 +12,18 @@ const GET_ALL_QUESTIONS = async (req, res) => {
   }
 };
 
+const GET_QUESTION_BY_ID = async (req, res) => {
+  try {
+    const question = await QuestionModel.findById(req.params.id);
+    return res.status(200).json({ question: question });
+  } catch (err) {
+    console.log(err);
+    return res
+      .status(500)
+      .json({ message: "Something went wrong on the server" });
+  }
+};
+
 const GET_ALL_QUESTIONS_BY_USER_ID = async (req, res) => {
   try {
     const question = await QuestionModel.find({ userId: req.body.userId });
@@ -62,6 +74,7 @@ const DELETE_QUESTION_BY_ID = async (req, res) => {
 
 export {
   GET_ALL_QUESTIONS,
+  GET_QUESTION_BY_ID,
   GET_ALL_QUESTIONS_BY_USER_ID,
   ADD_QUESTION,
   // LIKE_QUESTION,
